@@ -11,9 +11,21 @@ namespace AdventOfCock
         //Perfect dependancy injection
         private readonly int _iterations;
         private readonly List<List<int>> elves;
+        public static List<List<int>> ReadInput(string path)
+        {
+            string input = File.ReadAllText(path);
+            List<List<int>> list = new List<List<int>>();
+            string[] groups = input.Split("\n\n");
+            foreach (var group in groups)
+            {
+                var items = group.Split("\n").Select(s => int.Parse(s));
+                list.Add(items.ToList());
+            }
+            return list;
+        }
         public Day01(string file = "", int iterations = 0)
         {
-            elves = InputHelper.ReadInput(file);
+            elves = ReadInput(file);
             _iterations = iterations;
         }
         //public List<int> calories()

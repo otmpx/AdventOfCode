@@ -17,21 +17,18 @@
 
   <ItemGroup>
     <None Remove="Day01\Input01.txt" />
+    <None Remove="Day02\Input02.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Day01\Input01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Day02\Input02.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
-
-
-  <ItemGroup>
-    <Resource Include="Input01.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
 
 
   <ItemGroup>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vLhRvK22bnqZBbWpxy+CknXmw5RQRR0mNl4zENSfMUgT2OMzZDtCpoMmuSAHtXBtmt4XvqMUajFDij6K03IIQg==",
+  "dgSpecHash": "NTq1SQumuwrraK20NzX7f4pFXoM4uGHYkZRxg8I6D5iYITqsttgw565S5spnYVu++Kg95mh2nDHXfGUT0DfWzQ==",
   "success": true,
-  "projectFilePath": "/Users/owen/VisualStudio/AoC22/AdventOfCock.csproj",
+  "projectFilePath": "C:\\Users\\owent\\source\\repos\\AoC22\\AdventOfCock\\AdventOfCock.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -28,45 +28,53 @@ namespace AdventOfCock
             elves = ReadInput(file);
             _iterations = iterations;
         }
-        //public List<int> calories()
+        //public int PartOne(out int index)
         //{
-        //    var sum = elves.Select(l => l.Sum());
-        //    return sum.ToList();
+        //    int maxCalories = 0;
+        //    index = 0;
+        //    for (int i = 0; i < elves.Count; i++)
+        //    {
+        //        int calories = elves[i].Sum();
+        //        if (calories > maxCalories)
+        //        {
+        //            maxCalories = calories;
+        //            index = i;
+        //        }
+        //    }
+        //    return maxCalories;
+        //    //return calories().Max();
         //}
-        public int PartOne(out int index)
+        //public void PartOne()
+        //{
+        //    int index = 0;
+        //    Console.WriteLine(PartOne(out index));
+        //    //return calories().Max();
+        //}
+        //public void PartTwo()
+        //{
+        //    int[] topIterations = new int[_iterations];
+        //    for (int i = 0; i < _iterations; i++)
+        //    {
+        //        int index;
+        //        topIterations[i] = PartOne(out index);
+        //        elves.RemoveAt(index);
+        //    }
+        //    Console.WriteLine(topIterations.Sum());
+        //}
+        public List<int> Calories()
         {
-            int maxCalories = 0;
-            index = 0;
-            for (int i = 0; i < elves.Count; i++)
-            {
-                int calories = elves[i].Sum();
-                if (calories > maxCalories)
-                {
-                    maxCalories = calories;
-                    index = i;
-                }
-            }
-            return maxCalories;
-            //return calories().Max();
+            var sum = elves.Select(l => l.Sum());
+            return sum.ToList();
         }
         public void PartOne()
         {
-            int index = 0;
-            Console.WriteLine(PartOne(out index));
-            //return calories().Max();
+            Console.WriteLine(Calories().Max());
         }
         public void PartTwo()
         {
-            //var sorted = calories().OrderBy(a => -a);
-            //var top3 = sorted.Take(3).Sum();
-            int[] topIterations = new int[_iterations];
-            for (int i = 0; i < _iterations; i++)
-            {
-                int index;
-                topIterations[i] = PartOne(out index);
-                elves.RemoveAt(index);
-            }
-            Console.WriteLine(topIterations.Sum());
+            var sorted = Calories().OrderBy(a => -a);
+            var top3 = sorted.Take(3).Sum();
+            Console.WriteLine(top3);
         }
     }
 }

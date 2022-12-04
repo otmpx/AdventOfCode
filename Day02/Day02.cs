@@ -43,8 +43,7 @@ namespace AdventOfCock
         };
         public int CalculateScore(Zahandzuo s, Zahandzuo o)
         {
-            int score = 0;
-            score = (4 + (int)s - (int)o) % 3; // 0 1 2
+            int score = (4 + (int)s - (int)o) % 3; // 0 1 2
             score *= 3;
             score += ((int)s + 1);
             return score;

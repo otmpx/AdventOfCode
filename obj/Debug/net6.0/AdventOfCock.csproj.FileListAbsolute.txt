@@ -35,3 +35,5 @@ C:\Users\owent\source\repos\AoC22\AdventOfCock\bin\Debug\net6.0\Day04\Input04.tx
 C:\Users\owent\source\repos\AoC22\AdventOfCock\bin\Debug\net6.0\Day04\Sample04.txt
 C:\Users\owent\source\repos\AoC22\AdventOfCock\bin\Debug\net6.0\Day05\Input05b.txt
 C:\Users\owent\source\repos\AoC22\AdventOfCock\bin\Debug\net6.0\Day05\Input05a.txt
+C:\Users\owent\source\repos\AoC22\AdventOfCock\bin\Debug\net6.0\Day05\Sample05a.txt
+C:\Users\owent\source\repos\AoC22\AdventOfCock\bin\Debug\net6.0\Day05\Sample05b.txt

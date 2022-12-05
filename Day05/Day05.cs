@@ -23,7 +23,7 @@ namespace AdventOfCock
 
             // Add char from index of init[i]
             for (int i = 0; i < init.Length - 1; i++) // Exclude the last line (that goes 0 1 2 3 4 5 6 7 8 9)
-                for (int c = 0, v = 1; v < init[i].Length; c++, v += 4) // index of v by char: [1] [5] [9] [14]...
+                for (int c = 0, v = 1; v < init[i].Length; c++, v += 4) // index of v by char: [1] [5] [9] [13]...
                     formation[c].Add(init[i][v]);
 
             // Reverse and remove empty spaces from formation list

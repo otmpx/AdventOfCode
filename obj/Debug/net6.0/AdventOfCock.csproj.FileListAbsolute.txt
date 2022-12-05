@@ -33,3 +33,5 @@ C:\Users\owent\source\repos\AoC22\AdventOfCock\obj\Debug\net6.0\AdventOfCock.gen
 C:\Users\owent\source\repos\AoC22\AdventOfCock\obj\Debug\net6.0\ref\AdventOfCock.dll
 C:\Users\owent\source\repos\AoC22\AdventOfCock\bin\Debug\net6.0\Day04\Input04.txt
 C:\Users\owent\source\repos\AoC22\AdventOfCock\bin\Debug\net6.0\Day04\Sample04.txt
+C:\Users\owent\source\repos\AoC22\AdventOfCock\bin\Debug\net6.0\Day05\Input05b.txt
+C:\Users\owent\source\repos\AoC22\AdventOfCock\bin\Debug\net6.0\Day05\Input05a.txt

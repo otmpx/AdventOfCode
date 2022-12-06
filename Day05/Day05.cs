@@ -63,7 +63,7 @@ namespace AdventOfCock
                 moveTo[i] -= 1;
             }
         }
-        public void PartOne()
+        public void GetSurface(bool powerLevelOver9000)
         {
             // Doing this will still mutate the original list:
             //List<List<char>> newFormation = new();
@@ -78,7 +78,11 @@ namespace AdventOfCock
             {
                 int takeQuantity = (int)MathF.Min(newFormation[moveFrom[i]].Count, moveQuantity[i]);
                 if (takeQuantity == 0) continue;
-                var take = newFormation[moveFrom[i]].TakeLast(takeQuantity).Reverse();
+
+                var take = newFormation[moveFrom[i]].TakeLast(takeQuantity).ToList();
+                if (!powerLevelOver9000)
+                    take.Reverse();
+
                 newFormation[moveTo[i]].AddRange(take);
                 newFormation[moveFrom[i]].RemoveRange(newFormation[moveFrom[i]].Count - takeQuantity, takeQuantity);
 
@@ -92,25 +96,13 @@ namespace AdventOfCock
                 output += item.Last();
             Console.WriteLine(output);
         }
+        public void PartOne()
+        {
+            GetSurface(false);
+        }
         public void PartTwo()
         {
-            List<List<char>> newFormation = new();
-            foreach (var item in formation)
-                newFormation.Add(new(item));
-
-            for (int i = 0; i < iterations; i++)
-            {
-                int takeQuantity = (int)MathF.Min(newFormation[moveFrom[i]].Count, moveQuantity[i]);
-                if (takeQuantity == 0) continue;
-                var take = newFormation[moveFrom[i]].TakeLast(takeQuantity);
-                newFormation[moveTo[i]].AddRange(take);
-                newFormation[moveFrom[i]].RemoveRange(newFormation[moveFrom[i]].Count - takeQuantity, takeQuantity);
-            }
-
-            string output = "";
-            foreach (var item in newFormation)
-                output += item.Last();
-            Console.WriteLine(output);
+            GetSurface(true);
         }
     }
 }

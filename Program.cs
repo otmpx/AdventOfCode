@@ -3,7 +3,7 @@
     internal class Program
     {
         static IDay? currentDay;
-        static void Main(string[] args)
+        static void Main()
         {
             currentDay = new Day06("Day06/Input06.txt");
             currentDay.PartOne();

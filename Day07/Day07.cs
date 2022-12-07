@@ -7,26 +7,25 @@ using System.Threading.Tasks;
 
 namespace AdventOfCock
 {
-    public enum FileType { directory, file }
-    public class Node
-    {
-        public FileType fileType;
-        public string name = "";
-        public int size = 0;
-        public Node parentNode = null;
-        public List<Node> dirChildren = new List<Node>();
-    }
-
     internal class Day07 : IDay
     {
-        // cool inline constructor but happens before the actual constructor
-        public Node rootNode = new Node() { fileType = FileType.directory, name = "/" };
+        public enum FileType { directory, file }
+        public class Node
+        {
+            public FileType fileType;
+            public string name = "";
+            public int size = 0;
+            public Node parentNode = null;
+            public List<Node> dirChildren = new List<Node>();
+        }
+
+        public Node rootNode = new Node() { fileType = FileType.directory, name = "/" }; // Cool inline constructor but happens after the actual constructor
         public Node currentNode;
         public HashSet<Node> allDirectories = new(); // If you add the same instance of something, it wont add, basically dictionary but without value pair
         
-        public Dictionary<string, Action> Commands = new();
-        public string[] CurrentString = Array.Empty<string>();
-        public int CurrentReadInput = 0;
+        public Dictionary<string, Action> commands = new(); // Needs to init only after the class is instantiated
+        public string[] currentString = Array.Empty<string>();
+        public int currentReadInput = 0;
 
         readonly List<string> input = new();
         readonly List<string> inputCommands = new();
@@ -37,18 +36,18 @@ namespace AdventOfCock
             input.AddRange(lines.ToList());
             inputCommands.AddRange(lines.Where(l => l.StartsWith("$")).ToList());
 
-            Commands.Add("$", NewCommand);
-            Commands.Add("cd", ChangeDirectory);
-            Commands.Add("ls", ListDirectory);
+            commands.Add("$", NewCommand);
+            commands.Add("cd", ChangeDirectory);
+            commands.Add("ls", ListDirectory);
         }
         public void NewCommand()
         {
-            CurrentReadInput++;
-            Commands[CurrentString[1]]();
+            currentReadInput++;
+            commands[currentString[1]]();
         }
         public void ChangeDirectory()
         {
-            string selectDir = CurrentString.Last();
+            string selectDir = currentString.Last();
             switch (selectDir)
             {
                 case "/":
@@ -70,13 +69,12 @@ namespace AdventOfCock
         public void ListDirectory()
         {
             int dirLength = 0;
-            int startingReadInput = CurrentReadInput;
-            while (CurrentReadInput < input.Count && !input[CurrentReadInput].StartsWith("$"))
+            int startingReadInput = currentReadInput;
+            while (currentReadInput < input.Count && !input[currentReadInput].StartsWith("$"))
             {
                 dirLength++;
-                CurrentReadInput++;
+                currentReadInput++;
             }
-            //int dirSize = 0;
             for (int i = 0; i < dirLength; i++)
             {
                 string[] listDir = input[startingReadInput + i].Split(" ");
@@ -85,8 +83,11 @@ namespace AdventOfCock
                 if (listDir[0] == "dir") // If readinput is a sub-directory
                     currentNode.dirChildren.Add(new Node() { fileType = FileType.directory, name = listDir.Last(), parentNode = currentNode });
             }
-            //Directories[CurrentBranch.Last()] = dirSize;
         }
+        /// <summary>
+        /// Tree traversal fucky wucky
+        /// </summary>
+        /// <param name="node">The node to traverse recursively </param>
         public void LoadNodes(Node node)
         {
             if (node.fileType == FileType.file) return; // Base case to break the recursion
@@ -99,7 +100,8 @@ namespace AdventOfCock
         {
             for (int i = 0; i < inputCommands.Count; i++)
             {
-                CurrentString = (string[])inputCommands[i].Split(" ").Clone();
+               
+                currentString = (string[])inputCommands[i].Split(" ").Clone();
                 NewCommand();
             }
             LoadNodes(rootNode);

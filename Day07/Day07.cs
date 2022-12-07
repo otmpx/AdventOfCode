@@ -96,11 +96,11 @@ namespace AdventOfCock
             node.size = node.dirChildren.Sum(d => d.size); // Sum the results of the children that has recursed
             allDirectories.Add(node);
         }
+
         public void PartOne()
         {
             for (int i = 0; i < inputCommands.Count; i++)
             {
-               
                 currentString = (string[])inputCommands[i].Split(" ").Clone();
                 NewCommand();
             }
@@ -114,7 +114,6 @@ namespace AdventOfCock
             }
             Console.WriteLine(totalSize);
         }
-
         public void PartTwo()
         {
             int totalSpace = 70000000;

@@ -18,6 +18,7 @@ namespace AdventOfCock
             string[] init = File.ReadAllLines(inputA);
 
             // Init list of formation length
+            //formation.AddRange(Enumerable.Repeat(new List<char>(), (init[0].Length + 1) / 4).ToList());
             for (int i = 0; i < init[0].Length; i += 4)
                 formation.Add(new List<char>());
 

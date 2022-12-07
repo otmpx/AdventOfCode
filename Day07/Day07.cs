@@ -7,128 +7,120 @@ using System.Threading.Tasks;
 
 namespace AdventOfCock
 {
+    public enum FileType { directory, file }
+    public class Node
+    {
+        public FileType fileType;
+        public string name = "";
+        public int size = 0;
+        public Node parentNode = null;
+        public List<Node> dirChildren = new List<Node>();
+    }
+
     internal class Day07 : IDay
     {
-        public Dictionary<string, int> Directory = new()
-        {
-            {"/", 0}, {"..", CurrentBranch}
-        };
-        public Dictionary<string, RunActions> Commands = new()
-        {
-            {"$", RunActions.NewCommand}, {"cd", RunActions.ChangeDirectory}, {"ls", RunActions.ListDirectory}
-        };
-        public enum RunActions
-        {
-            NewCommand, ChangeDirectory, ListDirectory
-        };
-        public Dictionary<string, int> Files = new();
+        // cool inline constructor but happens before the actual constructor
+        public Node rootNode = new Node() { fileType = FileType.directory, name = "/" };
+        public Node currentNode;
+        public HashSet<Node> allDirectories = new(); // If you add the same instance of something, it wont add, basically dictionary but without value pair
+        
+        public Dictionary<string, Action> Commands = new();
         public string[] CurrentString = Array.Empty<string>();
-        public int CurrentAction = 0;
-        public static int CurrentBranch = 0;
         public int CurrentReadInput = 0;
+
         readonly List<string> input = new();
         readonly List<string> inputCommands = new();
-        readonly int maxSize = 100000;
         public Day07(string file)
         {
+            currentNode = rootNode;
             var lines = File.ReadAllLines(file);
             input.AddRange(lines.ToList());
             inputCommands.AddRange(lines.Where(l => l.StartsWith("$")).ToList());
-        }
-        public void RunCommand()
-        {
-            switch (Commands[CurrentString[CurrentAction]])
-            {
-                case RunActions.NewCommand:
-                    NewCommand();
-                    break;
-                case RunActions.ChangeDirectory:
-                    ChangeDirectory();
-                    break;
-                case RunActions.ListDirectory:
-                    ListDirectory();
-                    break;
-            }
+
+            Commands.Add("$", NewCommand);
+            Commands.Add("cd", ChangeDirectory);
+            Commands.Add("ls", ListDirectory);
         }
         public void NewCommand()
         {
-            CurrentAction = 1;
             CurrentReadInput++;
-            RunCommand();
+            Commands[CurrentString[1]]();
         }
         public void ChangeDirectory()
         {
-            string selectDir = CurrentString[CurrentAction + 1];
+            string selectDir = CurrentString.Last();
             switch (selectDir)
             {
                 case "/":
                     //switch back to main directory
-                    CurrentBranch = 0;
+                    currentNode = rootNode;
                     break;
                 case "..":
                     //goes up 1 level
-                    CurrentBranch--;
+                    currentNode = currentNode.parentNode;
                     break;
                 default:
                     //goes in 1 level into specified dictionary
-                    CurrentBranch++;
-                    if (!Directory.ContainsKey(selectDir))
-                        Directory.Add(selectDir, CurrentBranch);
+                    currentNode = currentNode.dirChildren
+                        .Where(n => n.fileType == FileType.directory)
+                        .First(n => n.name == selectDir); // (n => bool) predicate asks for type bool
                     break;
             }
         }
         public void ListDirectory()
         {
-            CurrentReadInput++;
-            int dirLength = 1;
-            while (input[CurrentReadInput].StartsWith("$") && CurrentReadInput < input.Count)
+            int dirLength = 0;
+            int startingReadInput = CurrentReadInput;
+            while (CurrentReadInput < input.Count && !input[CurrentReadInput].StartsWith("$"))
             {
                 dirLength++;
                 CurrentReadInput++;
             }
-            int branchSize = 0;
-            int dirSize = 0;
-            for (int i = dirLength - 1; i >= 0; i--)
+            //int dirSize = 0;
+            for (int i = 0; i < dirLength; i++)
             {
-                string[] listDir = input[CurrentReadInput].Split(" ");
-                if (listDir[0] == "dir")
-                {
-                    Files.Add(listDir[1], dirSize); // Probably need to fix this
-                }
-                if (int.TryParse(listDir[0], out int fileSize))
-                {
-                    dirSize += fileSize;
-                    branchSize += fileSize;
-                }
-                if (i == 0) // will break if end of loop is not "dir x"
-                    Files.Add(listDir[1], branchSize); // Probably need to fix this
+                string[] listDir = input[startingReadInput + i].Split(" ");
+                if (int.TryParse(listDir[0], out int fileSize)) // If readinput is a file
+                    currentNode.dirChildren.Add(new Node() { fileType = FileType.file, name = listDir.Last(), parentNode = currentNode, size = fileSize });
+                if (listDir[0] == "dir") // If readinput is a sub-directory
+                    currentNode.dirChildren.Add(new Node() { fileType = FileType.directory, name = listDir.Last(), parentNode = currentNode });
             }
+            //Directories[CurrentBranch.Last()] = dirSize;
         }
-        public void Reset()
+        public void LoadNodes(Node node)
         {
-            CurrentString = Array.Empty<string>();
-            CurrentAction = 0;
-            CurrentBranch = 0;
-            CurrentReadInput = 0;
+            if (node.fileType == FileType.file) return; // Base case to break the recursion
+            foreach (var child in node.dirChildren)
+                LoadNodes(child);
+            node.size = node.dirChildren.Sum(d => d.size); // Sum the results of the children that has recursed
+            allDirectories.Add(node);
         }
         public void PartOne()
         {
             for (int i = 0; i < inputCommands.Count; i++)
             {
                 CurrentString = (string[])inputCommands[i].Split(" ").Clone();
-                RunCommand();
+                NewCommand();
             }
-            int highest = 0;
-            foreach (var item in Files)
+            LoadNodes(rootNode);
+            int maxSize = 100000;
+            int totalSize = 0;
+            foreach (var directory in allDirectories)
             {
-                if (highest < item.Value && item.Value < maxSize)
-                    highest = item.Value;
+                if (directory.size < maxSize)
+                    totalSize += directory.size;
             }
-            Console.WriteLine(highest);
+            Console.WriteLine(totalSize);
         }
 
         public void PartTwo()
         {
+            int totalSpace = 70000000;
+            int spaceRequired = 30000000;
+            int spaceAvailable = totalSpace - rootNode.size;
+            int spaceToYeet = spaceRequired - spaceAvailable;
+            Node nodeToYeet = allDirectories.Where(n => n.size > spaceToYeet).OrderBy(a => a.size).First();
+            Console.WriteLine(nodeToYeet.size);
         }
     }
 }

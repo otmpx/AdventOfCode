@@ -33,3 +33,6 @@ C:\Users\Owen\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.pdb
 C:\Users\Owen\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.genruntimeconfig.cache
 C:\Users\Owen\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\ref\AoC23.dll
 C:\Users\Owen\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Day02\Input02.txt
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Day02\Input02.txt
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Day03\Input03.txt
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Day03\Sample03.txt

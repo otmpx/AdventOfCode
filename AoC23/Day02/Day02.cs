@@ -1,99 +1,96 @@
 ﻿using System;
-
-namespace AoC23
+using AoC23;
+public class Day02 : IDay
 {
-    public class Day02 : IDay
-    {
-        enum Colour { red, green, blue }
-        Dictionary<Colour, int> maxCubes = new()
+    enum Colour { red, green, blue }
+    Dictionary<Colour, int> maxCubes = new()
         {
             { Colour.red, 12 },
             { Colour.green, 13 },
             { Colour.blue, 14 },
         };
-        List<List<Dictionary<Colour, int>>> games = new();
-        public Day02(string file)
+    List<List<Dictionary<Colour, int>>> games = new();
+    public Day02(string file)
+    {
+        var lines = File.ReadAllLines(file);
+        foreach (var item in lines)
         {
-            var lines = File.ReadAllLines(file);
-            foreach (var item in lines)
+            string gameData = item.Split(": ")[1];
+            string[] matches = gameData.Split("; ");
+            List<Dictionary<Colour, int>> matchEntry = new();
+            foreach (var scoreboard in matches)
             {
-                string gameData = item.Split(": ")[1];
-                string[] matches = gameData.Split("; ");
-                List<Dictionary<Colour, int>> matchEntry = new();
-                foreach (var scoreboard in matches)
+                Dictionary<Colour, int> scoreEntry = new();
+                string[] scores = scoreboard.Split(", ");
+                foreach (var cubeCount in scores)
                 {
-                    Dictionary<Colour, int> scoreEntry = new();
-                    string[] scores = scoreboard.Split(", ");
-                    foreach (var cubeCount in scores)
-                    {
-                        var split = cubeCount.Split(" ");
-                        scoreEntry.Add(StringToEnum(split[1]), int.Parse(split[0]));
-                    }
-                    matchEntry.Add(scoreEntry);
+                    var split = cubeCount.Split(" ");
+                    scoreEntry.Add(StringToEnum(split[1]), int.Parse(split[0]));
                 }
-                games.Add(matchEntry);
+                matchEntry.Add(scoreEntry);
             }
+            games.Add(matchEntry);
         }
-        Colour StringToEnum(string col)
+    }
+    Colour StringToEnum(string col)
+    {
+        switch (col)
         {
-            switch (col)
-            {
-                case "red": return Colour.red;
-                case "green": return Colour.green;
-                case "blue": return Colour.blue;
-                default: throw new NotImplementedException();
-            }
+            case "red": return Colour.red;
+            case "green": return Colour.green;
+            case "blue": return Colour.blue;
+            default: throw new NotImplementedException();
         }
+    }
 
-        public void PartOne()
+    public void PartOne()
+    {
+        List<bool> possibleGames = new();
+        foreach (var game in games)
         {
-            List<bool> possibleGames = new();
-            foreach (var game in games)
+            bool result = true;
+            foreach (var scoreboard in game)
             {
-                bool result = true;
-                foreach (var scoreboard in game)
-                {
-                    if (scoreboard.ContainsKey(Colour.red) && scoreboard[Colour.red] > maxCubes[Colour.red])
-                        result = false;
-                    if (scoreboard.ContainsKey(Colour.green) && scoreboard[Colour.green] > maxCubes[Colour.green])
-                        result = false;
-                    if (scoreboard.ContainsKey(Colour.blue) && scoreboard[Colour.blue] > maxCubes[Colour.blue])
-                        result = false;
-                }
-                possibleGames.Add(result);
+                if (scoreboard.ContainsKey(Colour.red) && scoreboard[Colour.red] > maxCubes[Colour.red])
+                    result = false;
+                if (scoreboard.ContainsKey(Colour.green) && scoreboard[Colour.green] > maxCubes[Colour.green])
+                    result = false;
+                if (scoreboard.ContainsKey(Colour.blue) && scoreboard[Colour.blue] > maxCubes[Colour.blue])
+                    result = false;
             }
-            int indexSum = 0;
-            for (int i = 0; i < possibleGames.Count; i++)
-            {
-                if (possibleGames[i])
-                    indexSum += (i + 1);
-            }
-            Console.WriteLine(indexSum);
+            possibleGames.Add(result);
         }
-
-        public void PartTwo()
+        int indexSum = 0;
+        for (int i = 0; i < possibleGames.Count; i++)
         {
-            List<int> powers = new();
-            foreach (var game in games)
-            {
-                Dictionary<Colour, int> minReq = new()
+            if (possibleGames[i])
+                indexSum += (i + 1);
+        }
+        Console.WriteLine(indexSum);
+    }
+
+    public void PartTwo()
+    {
+        List<int> powers = new();
+        foreach (var game in games)
+        {
+            Dictionary<Colour, int> minReq = new()
                 {
                     { Colour.red, 0 },
                     { Colour.green, 0 },
                     { Colour.blue, 0 }
                 };
-                foreach (var scoreboard in game)
-                {
-                    if (scoreboard.ContainsKey(Colour.red) && scoreboard[Colour.red] > minReq[Colour.red])
-                        minReq[Colour.red] = scoreboard[Colour.red];
-                    if (scoreboard.ContainsKey(Colour.green) && scoreboard[Colour.green] > minReq[Colour.green])
-                        minReq[Colour.green] = scoreboard[Colour.green];
-                    if (scoreboard.ContainsKey(Colour.blue) && scoreboard[Colour.blue] > minReq[Colour.blue])
-                        minReq[Colour.blue] = scoreboard[Colour.blue];
-                }
-                powers.Add(minReq[Colour.red] * minReq[Colour.green] * minReq[Colour.blue]);
+            foreach (var scoreboard in game)
+            {
+                if (scoreboard.ContainsKey(Colour.red) && scoreboard[Colour.red] > minReq[Colour.red])
+                    minReq[Colour.red] = scoreboard[Colour.red];
+                if (scoreboard.ContainsKey(Colour.green) && scoreboard[Colour.green] > minReq[Colour.green])
+                    minReq[Colour.green] = scoreboard[Colour.green];
+                if (scoreboard.ContainsKey(Colour.blue) && scoreboard[Colour.blue] > minReq[Colour.blue])
+                    minReq[Colour.blue] = scoreboard[Colour.blue];
             }
-            Console.WriteLine(powers.Sum());
+            powers.Add(minReq[Colour.red] * minReq[Colour.green] * minReq[Colour.blue]);
         }
+        Console.WriteLine(powers.Sum());
     }
 }

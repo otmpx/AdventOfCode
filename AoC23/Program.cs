@@ -5,7 +5,7 @@
         static IDay? currentDay;
         static void Main()
         {
-            currentDay = new Day02("Day02/Input02.txt");
+            currentDay = new Day03("Day03/Sample03.txt");
             currentDay.PartOne();
             currentDay.PartTwo();
         }

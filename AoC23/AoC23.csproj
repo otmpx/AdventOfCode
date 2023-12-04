@@ -8,15 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Program.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <None Remove="Day01\Input01.txt" />
+    <None Remove="Day02\Input02.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Day01\Input01.txt">
+    <Content Include="Day01\Input01.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="Day02\Input02.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Program.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
 </Project>

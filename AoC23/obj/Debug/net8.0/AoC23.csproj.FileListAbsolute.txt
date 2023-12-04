@@ -13,3 +13,5 @@ C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\refint\AoC23.dll
 C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.pdb
 C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.genruntimeconfig.cache
 C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\ref\AoC23.dll
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Program.cs
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Day01\Input01.txt

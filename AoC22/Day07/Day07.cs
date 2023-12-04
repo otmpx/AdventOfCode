@@ -5,7 +5,7 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventOfCock
+namespace AoC22
 {
     internal class Day07 : IDay
     {

@@ -5,7 +5,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventOfCock
+namespace AoC22
 {
     internal class Day04 : IDay
     {

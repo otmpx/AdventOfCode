@@ -1,5 +1,5 @@
 ﻿using System;
-namespace AdventOfCock
+namespace AoC22
 {
     public class Day02 : IDay
     {

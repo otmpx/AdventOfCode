@@ -1,4 +1,4 @@
-﻿namespace AdventOfCock
+﻿namespace AoC22
 {
     internal class Program
     {

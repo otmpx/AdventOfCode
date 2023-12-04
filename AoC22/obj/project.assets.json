@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\owent\\source\\repos\\AoC22\\AdventOfCock\\AdventOfCock.csproj",
-      "projectName": "AdventOfCock",
-      "projectPath": "C:\\Users\\owent\\source\\repos\\AoC22\\AdventOfCock\\AdventOfCock.csproj",
+      "projectUniqueName": "C:\\Users\\owent\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj",
+      "projectName": "AoC22",
+      "projectPath": "C:\\Users\\owent\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj",
       "packagesPath": "C:\\Users\\owent\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\owent\\source\\repos\\AoC22\\AdventOfCock\\obj\\",
+      "outputPath": "C:\\Users\\owent\\Documents\\AdventOfCode\\AoC22\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\owent\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

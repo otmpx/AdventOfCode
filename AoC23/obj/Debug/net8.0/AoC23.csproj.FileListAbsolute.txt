@@ -1,0 +1,15 @@
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\AoC23.exe
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\AoC23.deps.json
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\AoC23.runtimeconfig.json
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\AoC23.dll
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\AoC23.pdb
+C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.AssemblyInfoInputs.cache
+C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.AssemblyInfo.cs
+C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.csproj.CoreCompileInputs.cache
+C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.sourcelink.json
+C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.dll
+C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\refint\AoC23.dll
+C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.pdb
+C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\AoC23.genruntimeconfig.cache
+C:\Users\owent\Documents\AdventOfCode\AoC23\obj\Debug\net8.0\ref\AoC23.dll

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NTq1SQumuwrraK20NzX7f4pFXoM4uGHYkZRxg8I6D5iYITqsttgw565S5spnYVu++Kg95mh2nDHXfGUT0DfWzQ==",
+  "dgSpecHash": "TOZGKin37jRH4r1dEnV3J92aYZzOcpUcufeuejlbifyc+wUSEn/dYyQFPIAH75M5xkmJWJxEiRSnLLmThSsBqQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\owent\\source\\repos\\AoC22\\AdventOfCock\\AdventOfCock.csproj",
+  "projectFilePath": "C:\\Users\\owent\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

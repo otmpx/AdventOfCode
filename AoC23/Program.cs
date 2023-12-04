@@ -1,8 +1,13 @@
-﻿namespace AoC23;
-class Program
+﻿namespace AoC23
 {
-    static void Main(string[] args)
+    internal class Program
     {
-        Console.WriteLine("Hello, World!");
+        static IDay? currentDay;
+        static void Main()
+        {
+            currentDay = new Day01("Day01/Input01.txt");
+            currentDay.PartOne();
+            currentDay.PartTwo();
+        }
     }
 }

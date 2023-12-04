@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 
 namespace AoC23
 {
@@ -49,7 +48,7 @@ namespace AoC23
         public void PartOne()
         {
             List<bool> possibleGames = new();
-            foreach(var game in games)
+            foreach (var game in games)
             {
                 bool result = true;
                 foreach (var scoreboard in game)
@@ -67,13 +66,34 @@ namespace AoC23
             for (int i = 0; i < possibleGames.Count; i++)
             {
                 if (possibleGames[i])
-                    indexSum += i;
+                    indexSum += (i + 1);
             }
             Console.WriteLine(indexSum);
         }
 
         public void PartTwo()
         {
+            List<int> powers = new();
+            foreach (var game in games)
+            {
+                Dictionary<Colour, int> minReq = new()
+                {
+                    { Colour.red, 0 },
+                    { Colour.green, 0 },
+                    { Colour.blue, 0 }
+                };
+                foreach (var scoreboard in game)
+                {
+                    if (scoreboard.ContainsKey(Colour.red) && scoreboard[Colour.red] > minReq[Colour.red])
+                        minReq[Colour.red] = scoreboard[Colour.red];
+                    if (scoreboard.ContainsKey(Colour.green) && scoreboard[Colour.green] > minReq[Colour.green])
+                        minReq[Colour.green] = scoreboard[Colour.green];
+                    if (scoreboard.ContainsKey(Colour.blue) && scoreboard[Colour.blue] > minReq[Colour.blue])
+                        minReq[Colour.blue] = scoreboard[Colour.blue];
+                }
+                powers.Add(minReq[Colour.red] * minReq[Colour.green] * minReq[Colour.blue]);
+            }
+            Console.WriteLine(powers.Sum());
         }
     }
 }

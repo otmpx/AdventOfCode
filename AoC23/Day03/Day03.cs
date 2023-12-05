@@ -1,8 +1,30 @@
 ﻿using AoC23;
-using System;
-
 public class Day03 : IDay
 {
+    public struct Position
+    {
+        public int x;
+        public int y;
+    }
+    public Position bounds;
+    public List<Position> dir8 = new()
+    {
+        new Position{x = 0, y = 1},
+        new Position{x = 1, y = 1},
+        new Position{x = 1, y = 0},
+        new Position{x = 1, y = -1},
+        new Position{x = 0, y = -1},
+        new Position{x = -1, y = -1},
+        new Position{x = -1, y = 0},
+        new Position{x = -1, y = 1}
+    };
+    public class Transform
+    {
+        public Position pos;
+        public char value;
+        public bool marked;
+    }
+    public List<Transform> points = new();
     public Day03(string file)
     {
         var lines = File.ReadAllLines(file);
@@ -21,117 +43,40 @@ public class Day03 : IDay
             }
         }
     }
-    public struct Position
-    {
-        public int x;
-        public int y;
-    }
-    public class Transform
-    {
-        public Position pos;
-        public char value;
-        public bool marked = false;
-    }
-    public Position bounds;
-    public List<Transform> points = new();
-    char GetTransformValue(int x, int y)
-    {
-        if (x < 0 || x >= bounds.x || y < 0 || y >= bounds.y) return '.';
-        var search = points.Where(p => p.pos.x == x && p.pos.y == y).First();
-        if (search == null)
-            return '.';
-        else
-            return search.value;
-    }
-    Transform GetTransform(int x, int y)
-    {
-        var search = points.Where(p => p.pos.x == x && p.pos.y == y).First();
-        if (search == null)
-            return null;
-        else
-            return search;
-    }
+    Transform GetTransform(int x, int y) => points.Where(p => p.pos.x == x && p.pos.y == y).FirstOrDefault();
+    Transform GetAdjacent(Position from, Position to) => points.Where(p => p.pos.x == from.x + to.x && p.pos.y == from.y + to.y).FirstOrDefault();
     string GetFullNumber(Transform t)
     {
         if (t.marked) return "";
         t.marked = true;
         string concatenated = "";
+
         if (char.IsDigit(t.value))
             concatenated = t.value.ToString();
-        if (GetTransformValue(t.pos.x - 1, t.pos.y) != '.')
-            concatenated = GetFullNumber(GetTransform(t.pos.x - 1, t.pos.y)) + concatenated;
-        if (GetTransformValue(t.pos.x + 1, t.pos.y) != '.')
-            concatenated += GetFullNumber(GetTransform(t.pos.x + 1, t.pos.y));
+
+        Transform left = GetTransform(t.pos.x - 1, t.pos.y);
+        if (left != null && char.IsDigit(left.value))
+            concatenated = GetFullNumber(left) + concatenated;
+
+        Transform right = GetTransform(t.pos.x + 1, t.pos.y);
+        if (right != null && char.IsDigit(right.value))
+            concatenated += GetFullNumber(right);
+
         return concatenated;
     }
     int SumAdjacent(Transform t)
     {
         int sum = 0;
-
-        char south = GetTransformValue(t.pos.x, t.pos.y + 1);
-        if (south != '.' && char.IsDigit(south))
+        foreach (var dir in dir8)
         {
-            string number = GetFullNumber(GetTransform(t.pos.x, t.pos.y + 1));
-            if (number != "")
-                sum += int.Parse(number);
+            Transform adjacent = GetAdjacent(t.pos, dir);
+            if (adjacent != null && char.IsDigit(adjacent.value))
+            {
+                string number = GetFullNumber(adjacent);
+                if (number != "")
+                    sum += int.Parse(number);
+            }
         }
-
-        char southEast = GetTransformValue(t.pos.x + 1, t.pos.y + 1);
-        if (southEast != '.' && char.IsDigit(southEast))
-        {
-            string number = GetFullNumber(GetTransform(t.pos.x + 1, t.pos.y + 1));
-            if (number != "")
-                sum += int.Parse(number);
-        }
-
-        char east = GetTransformValue(t.pos.x + 1, t.pos.y);
-        if (east != '.' && char.IsDigit(east))
-        {
-            string number = GetFullNumber(GetTransform(t.pos.x + 1, t.pos.y));
-            if (number != "")
-                sum += int.Parse(number);
-        }
-
-        char northEast = GetTransformValue(t.pos.x + 1, t.pos.y - 1);
-        if (northEast != '.' && char.IsDigit(northEast))
-        {
-            string number = GetFullNumber(GetTransform(t.pos.x + 1, t.pos.y - 1));
-            if (number != "")
-                sum += int.Parse(number);
-        }
-
-        char north = GetTransformValue(t.pos.x, t.pos.y - 1);
-        if (north != '.' && char.IsDigit(north))
-        {
-            string number = GetFullNumber(GetTransform(t.pos.x, t.pos.y - 1));
-            if (number != "")
-                sum += int.Parse(number);
-        }
-
-        char northWest = GetTransformValue(t.pos.x - 1, t.pos.y - 1);
-        if (northWest != '.' && char.IsDigit(northWest))
-        {
-            string number = GetFullNumber(GetTransform(t.pos.x - 1, t.pos.y - 1));
-            if (number != "")
-                sum += int.Parse(number);
-        }
-
-        char west = GetTransformValue(t.pos.x - 1, t.pos.y);
-        if (west != '.' && char.IsDigit(west))
-        {
-            string number = GetFullNumber(GetTransform(t.pos.x - 1, t.pos.y));
-            if (number != "")
-                sum += int.Parse(number);
-        }
-
-        char southWest = GetTransformValue(t.pos.x - 1, t.pos.y + 1);
-        if (southWest != '.' && char.IsDigit(southWest))
-        {
-            string number = GetFullNumber(GetTransform(t.pos.x - 1, t.pos.y + 1));
-            if (number != "")
-                sum += int.Parse(number);
-        }
-
         return sum;
     }
     public void PartOne()
@@ -139,13 +84,45 @@ public class Day03 : IDay
         int sum = 0;
         foreach (var item in points)
         {
+            item.marked = false;
+
             if (item.value != '.' && !char.IsLetterOrDigit(item.value))
                 sum += SumAdjacent(item);
         }
         Console.WriteLine(sum);
     }
-
+    int SumRatio(Transform t)
+    {
+        List<string> numbers = new();
+        foreach (var dir in dir8)
+        {
+            Transform adjacent = GetAdjacent(t.pos, dir);
+            if (adjacent != null && char.IsDigit(adjacent.value))
+            {
+                string number = GetFullNumber(adjacent);
+                if (number != "")
+                    numbers.Add(number);
+            }
+        }
+        int sum = 0;
+        if (numbers.Count > 1)
+        {
+            sum = 1;
+            foreach (var number in numbers)
+                sum *= int.Parse(number);
+        }
+        return sum;
+    }
     public void PartTwo()
     {
+        int gearRatio = 0;
+        foreach (var item in points)
+        {
+            item.marked = false;
+
+            if (item.value == '*')
+                gearRatio += SumRatio(item);
+        }
+        Console.WriteLine(gearRatio);
     }
 }

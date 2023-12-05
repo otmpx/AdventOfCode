@@ -1,5 +1,4 @@
-﻿using System;
-using AoC23;
+﻿using AoC23;
 public class Day02 : IDay
 {
     enum Colour { red, green, blue }

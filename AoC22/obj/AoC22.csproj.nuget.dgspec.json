@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Owen\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj": {}
+    "C:\\Users\\owent\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Owen\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj": {
+    "C:\\Users\\owent\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Owen\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj",
+        "projectUniqueName": "C:\\Users\\owent\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj",
         "projectName": "AoC22",
-        "projectPath": "C:\\Users\\Owen\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj",
-        "packagesPath": "C:\\Users\\Owen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Owen\\Documents\\AdventOfCode\\AoC22\\obj\\",
+        "projectPath": "C:\\Users\\owent\\Documents\\AdventOfCode\\AoC22\\AoC22.csproj",
+        "packagesPath": "C:\\Users\\owent\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\owent\\Documents\\AdventOfCode\\AoC22\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Owen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\owent\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

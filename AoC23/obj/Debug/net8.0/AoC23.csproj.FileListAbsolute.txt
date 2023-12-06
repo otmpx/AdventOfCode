@@ -38,3 +38,4 @@ C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Day03\Input03.txt
 C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Day03\Sample03.txt
 C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Day04\Input04.txt
 C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Day05\Input05.txt
+C:\Users\owent\Documents\AdventOfCode\AoC23\bin\Debug\net8.0\Day06\Input06.txt

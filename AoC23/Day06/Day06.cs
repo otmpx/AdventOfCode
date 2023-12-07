@@ -72,5 +72,10 @@ public class Day06 : IDay
                 wins++;
         }
         Console.WriteLine(wins);
+
+        // Quadratic math way:
+        // travelDist = chargeTime * (totalTime - chargeTime)
+        // chargeTime^2 - chargeTime*totalTime + travelDist = 0
+        // wins = roots of chargeTime: (higher time - lower time) + 1
     }
 }
